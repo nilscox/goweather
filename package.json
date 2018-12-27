@@ -4,10 +4,20 @@
   "private": true,
   "dependencies": {
     "@types/react-router-dom": "^4.3.1",
+    "@types/reactstrap": "^6.4.3",
+    "@types/redux-logger": "^3.0.6",
+    "@types/redux-pack": "^0.1.4",
+    "bootstrap": "^4.2.1",
+    "open-iconic": "^1.1.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts-ts": "3.1.0"
+    "react-scripts-ts": "3.1.0",
+    "reactstrap": "^6.5.0",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-pack": "^0.1.5"
   },
   "scripts": {
     "start": "react-scripts-ts start",
