@@ -3,7 +3,7 @@ import { css, jsx } from '@emotion/core';
 import { Component } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { RouteComponentProps, Redirect } from 'react-router-dom';
+import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
 
 import Header from '../components/Header';
 
@@ -85,6 +85,8 @@ class Forecast extends Component<ForecastProps, ForecastState> {
         <div css={listWrapperStyle} className="py-2">
           { this.props.days.map(weather => this.renderWeather(weather)) }
         </div>
+
+        <Link to="/">&lt; Home</Link>
 
       </div>
     );
