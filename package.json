@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.5",
+    "@emotion/types": "^0.7.0",
     "@types/react-router-dom": "^4.3.1",
     "@types/reactstrap": "^6.4.3",
     "@types/redux-logger": "^3.0.6",
