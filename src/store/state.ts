@@ -9,5 +9,6 @@ export interface IWeather {
 }
 
 export type State = {
+  cityName: string,
   weather: IWeather[] | null,
 };

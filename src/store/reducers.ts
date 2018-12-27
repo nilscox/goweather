@@ -8,7 +8,10 @@ const weather = (state: any = null, action: any) => {
   if (action.type === FETCH_WEATHER) {
     return handle(state, action, {
       success: prevState => {
-        const { json } = action.payload;
+        const { res, json } = action.payload;
+
+        if (!res.ok)
+          return state;
 
         return json.list.map((item: any) => ({
           date: moment(item.dt_txt),
@@ -24,6 +27,24 @@ const weather = (state: any = null, action: any) => {
   return state;
 };
 
+const cityName = (state: any = null, action: any) => {
+  if (action.type === FETCH_WEATHER) {
+    return handle(state, action, {
+      success: prevState => {
+        const { res, json } = action.payload;
+
+        if (!res.ok)
+          return state;
+
+        return json.city.name;
+      },
+    });
+  }
+
+  return state;
+};
+
 export default combineReducers({
+  cityName,
   weather,
 });
