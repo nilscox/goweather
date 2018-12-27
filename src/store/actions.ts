@@ -6,7 +6,11 @@ const API_KEY = '';
 const apiRequest = async (route: string, qs: any) => {
   const res = await fetch([
     API_BASE_URL, route, '?',
-    queryString.stringify({ APPID: API_KEY, ...qs })
+    queryString.stringify({
+      APPID: API_KEY,
+      units: 'metric',
+      ...qs,
+    }),
   ].join(''));
 
   return {

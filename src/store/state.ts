@@ -1,7 +1,13 @@
-export type State = {};
+import { Moment } from 'moment';
 
-const defaultState: State = {
+export interface IWeather {
+  date: Moment,
+  description: string,
+  humidity: number,
+  pressure: number,
+  temperature: number,
+}
 
+export type State = {
+  weather: IWeather[] | null,
 };
-
-export default defaultState;

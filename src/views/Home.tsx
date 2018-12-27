@@ -46,7 +46,7 @@ class Home extends Component<HomeProps, HomeState> {
       return <Redirect to={'/forecast/' + redirectCityId} />;
 
     return (
-      <div className="container py-3">
+      <div>
 
         <Header>Weather Forecast</Header>
 
@@ -91,13 +91,11 @@ class Home extends Component<HomeProps, HomeState> {
 
     const { cityName, countryCode } = this.state;
 
-    const { payload: res } = await this.props.fetchWeather(cityName, countryCode);
+    const { payload } = await this.props.fetchWeather(cityName, countryCode);
+    const { res, json } = payload;
 
-    if (res.ok) {
-      const json = await res.json();
-
+    if (res.ok)
       this.setState({ redirectCityId: json.city.id });
-    }
   }
 
 }

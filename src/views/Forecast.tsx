@@ -10,8 +10,14 @@ import Header from '../components/Header';
 import { State } from '../store/state';
 import { fetchWeatherFromCityId } from '../store/actions';
 
-const mapStateToProps = (state: State) => ({
-});
+const mapStateToProps = (state: State) => {
+  if (!state.weather)
+    return {};
+
+  const days = state.weather.filter(item => item.date.hour() === 12);
+
+  return { days };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchWeather: (cityId: number) => {
@@ -43,7 +49,8 @@ class Forecast extends Component<ForecastProps, ForecastState> {
     const { cityId } = this.props.match.params;
 
     try {
-      const { payload: res } = await this.props.fetchWeather(parseInt(cityId, 10));
+      const { payload } = await this.props.fetchWeather(parseInt(cityId, 10));
+      const { res } = payload;
 
       if (!res.ok)
         this.setState({ redirectToHome: true });

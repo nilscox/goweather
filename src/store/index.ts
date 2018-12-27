@@ -4,14 +4,12 @@ import { middleware as reduxPackMiddleware } from 'redux-pack';
 
 import rootReducer from './reducers';
 
-import defaultState from './state';
-
 const logger = createLogger({
   collapsed: true,
   diff: true,
 });
 
-const store = createStore(rootReducer, defaultState,
+const store = createStore(rootReducer,
   applyMiddleware(
     reduxPackMiddleware,
     logger,
