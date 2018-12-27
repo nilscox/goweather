@@ -2,12 +2,12 @@
 import { jsx } from '@emotion/core'
 
 type HeaderProps = {
-  title: string;
+  children: string;
 };
 
-const Header = ({ title }: HeaderProps) => (
+const Header = ({ children }: HeaderProps) => (
   <div>
-    <h1>{ title }</h1>
+    <h1>{ children }</h1>
   </div>
 );
 

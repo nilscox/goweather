@@ -1,22 +1,24 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core'
+import { css, jsx } from '@emotion/core';
 import { Component } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import { Button, Input, InputGroup } from 'reactstrap';
 
 import Header from '../components/Header';
 
 import { State } from '../store/state';
-import { fetchWeather } from '../store/actions';
+import { fetchWeatherFromCityName } from '../store/actions';
 
 const mapStateToProps = (state: State) => ({
 
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchWeather: (cityName: string, countryCode: string) => dispatch(fetchWeather(cityName, countryCode)),
+  fetchWeather: (cityName: string, countryCode: string) => {
+    return dispatch(fetchWeatherFromCityName(cityName, countryCode));
+  },
 });
 
 type HomeProps = {
@@ -46,7 +48,7 @@ class Home extends Component<HomeProps, HomeState> {
     return (
       <div className="container py-3">
 
-        <Header title="Weather Forecast" />
+        <Header>Weather Forecast</Header>
 
         { this.renderForm() }
 
