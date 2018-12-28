@@ -1,7 +1,9 @@
 import * as queryString from 'query-string';
 
-const API_BASE_URL = 'https://api.openweathermap.org';
-const API_KEY = '';
+import {
+  OWM_API_BASE_URL as API_BASE_URL,
+  OWM_API_KEY as API_KEY,
+} from '../env.json';
 
 const apiRequest = async (route: string, qs: any) => {
   const res = await fetch([
