@@ -2,7 +2,12 @@ import { ICity } from '../interfaces';
 
 const LS_KEY = 'cities';
 
-export const getHistory = () => {
+/**
+ * Fetch the history list from the local storage.
+ *
+ * @returns the cities list
+ */
+export const getHistory: () => ICity[] = () => {
   const json = localStorage.getItem(LS_KEY);
 
   if (!json)
@@ -11,7 +16,13 @@ export const getHistory = () => {
   return JSON.parse(json);
 }
 
-export const addToHistory = (city: ICity) => {
+/**
+ * Add a city to the history. If the city already exists,
+ * it will then be set on the first place.
+ *
+ * @param city the city to add
+ */
+export const addToHistory: (city: ICity) => void = (city: ICity) => {
   const history = getHistory();
   const idx = history.findIndex(({ id }: ICity) => id === city.id);
 
