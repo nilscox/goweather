@@ -16,3 +16,6 @@ keys:
   "OWM_API_KEY": "YOUR API KEY"
 }
 ```
+
+> Note: Do not use in production! The API key is bundled into the app, and is
+> then accessible to anyone.
