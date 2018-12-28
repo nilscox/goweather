@@ -7,9 +7,9 @@ import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
 import { PageTitle } from '../../components';
-import { IWeather } from '../../interfaces';
+import { ICity, IWeather } from '../../interfaces';
 import { State } from '../../store/state';
-import { fetchWeatherFromCityId } from '../../store/actions';
+import { fetchWeatherFromCityId, addHistory } from '../../store/actions';
 
 import ForecastItem from './ForecastItem';
 
@@ -20,7 +20,8 @@ type MatchParams = {
 type ForecastProps = {
   cityName: string;
   days: IWeather[];
-  fetchWeather: (cityId: number) => any; // code smell
+  addHistory: (city: ICity) => any, // code smell
+  fetchWeather: (cityId: number) => any;
 } & RouteComponentProps<MatchParams>;
 
 type ForecastState = {
@@ -44,6 +45,7 @@ const mapStateToProps = (state: State) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addHistory: (city: ICity) => dispatch(addHistory(city)),
   fetchWeather: (cityId: number) => {
     return dispatch(fetchWeatherFromCityId(cityId));
   },
@@ -66,10 +68,15 @@ class Forecast extends Component<ForecastProps, ForecastState> {
 
     try {
       const { payload } = await this.props.fetchWeather(parseInt(cityId, 10));
-      const { res } = payload;
+      const { res, json } = payload;
 
-      if (!res.ok)
+      if (res.ok) {
+        const { city } = json;
+
+        this.props.addHistory({ id: city.id, name: city.name, country: city.country });
+      } else {
         this.setState({ redirectToHome: true });
+      }
     } finally {
       // possible race condition?
       if (!this.state.redirectToHome)

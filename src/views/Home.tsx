@@ -9,13 +9,12 @@ import { Button, Container, Input, InputGroup } from 'reactstrap';
 import { State } from '../store/state';
 import { PageTitle } from '../components';
 import { ICity } from '../interfaces';
-import { fetchWeatherFromCityName, loadHistory, addHistory } from '../store/actions';
+import { fetchWeatherFromCityName, loadHistory } from '../store/actions';
 
 type HomeProps = {
   searchHistory: ICity[],
-  addHistory: (city: ICity) => any, // code smell
   loadHistory: () => any,
-  fetchWeather: (cityName: string, countryCode: string) => any;
+  fetchWeather: (cityName: string, countryCode: string) => any; // code smell
 };
 
 type HomeState = {
@@ -29,7 +28,6 @@ const mapStateToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addHistory: (city: ICity) => dispatch(addHistory(city)),
   fetchWeather: (cityName: string, countryCode: string) => {
     return dispatch(fetchWeatherFromCityName(cityName, countryCode));
   },
@@ -150,7 +148,6 @@ class Home extends Component<HomeProps, HomeState> {
     if (res.ok) {
       const { city } = json;
 
-      this.props.addHistory({ id: city.id, name: city.name, country: city.country });
       this.setState({ redirectCityId: city.id });
     }
   }
