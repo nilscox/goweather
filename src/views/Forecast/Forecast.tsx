@@ -13,6 +13,8 @@ import { fetchWeatherFromCityId, addHistory } from '../../store/actions';
 
 import ForecastItem from './ForecastItem';
 
+const REFRESH_INTERVAL = 1000 * 60 * 60 * 5; // 5h
+
 type MatchParams = {
   cityId: string;
 };
@@ -63,25 +65,26 @@ class Forecast extends Component<ForecastProps, ForecastState> {
     redirectToHome: false,
   };
 
+  private refreshInterval: NodeJS.Timeout | null;
+
+  constructor(props: ForecastProps) {
+    super(props);
+
+    this.refreshInterval = null;
+  }
+
   public async componentDidMount() {
-    const { cityId } = this.props.match.params;
+    const { cityId: cityIdStr } = this.props.match.params;
+    const cityId = parseInt(cityIdStr, 10);
 
-    try {
-      const { payload } = await this.props.fetchWeather(parseInt(cityId, 10));
-      const { res, json } = payload;
+    await this.fetchWeather(cityId);
 
-      if (res.ok) {
-        const { city } = json;
+    this.refreshInterval = setInterval(() => this.fetchWeather(cityId), REFRESH_INTERVAL);
+  }
 
-        this.props.addHistory({ id: city.id, name: city.name, country: city.country });
-      } else {
-        this.setState({ redirectToHome: true });
-      }
-    } finally {
-      // possible race condition?
-      if (!this.state.redirectToHome)
-        this.setState({ loading: false });
-    }
+  public componentWillUnmount() {
+    if (this.refreshInterval)
+      clearInterval(this.refreshInterval);
   }
 
   public render() {
@@ -109,6 +112,25 @@ class Forecast extends Component<ForecastProps, ForecastState> {
 
       </Container>
     );
+  }
+
+  private async fetchWeather(cityId: number) {
+    try {
+      const { payload } = await this.props.fetchWeather(cityId);
+      const { res, json } = payload;
+
+      if (res.ok) {
+        const { city } = json;
+
+        this.props.addHistory({ id: city.id, name: city.name, country: city.country });
+      } else {
+        this.setState({ redirectToHome: true });
+      }
+    } finally {
+      // possible race condition?
+      if (!this.state.redirectToHome)
+        this.setState({ loading: false });
+    }
   }
 
 }
