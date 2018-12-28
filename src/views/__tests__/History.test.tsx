@@ -3,11 +3,11 @@ import * as renderer from 'react-test-renderer';
 
 import TestEnv from '../../utils/TestEnv';
 
-import Footer from '../Footer';
+import History from '../History';
 
-test('Footer', () => {
+test('History', () => {
   const tree = renderer
-    .create(<TestEnv><Footer /></TestEnv>)
+    .create(<TestEnv><History /></TestEnv>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

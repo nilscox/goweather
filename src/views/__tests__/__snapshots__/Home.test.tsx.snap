@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home 1`] = `
+<div
+  className="pb-4 container"
+>
+  <h1
+    className="text-center py-4 css-1aylpg"
+  >
+    Welcome to GoWeather!
+  </h1>
+  <p>
+    Search for a location using the form below to see its weather forecast for the 5 next days.
+  </p>
+  <form
+    className="py-3 px-2 css-1bivl2p"
+    onSubmit={[Function]}
+  >
+    <div
+      className="my-1 input-group"
+    >
+      <input
+        className="form-control"
+        onChange={[Function]}
+        placeholder="City"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="my-1 input-group"
+    >
+      <input
+        className="form-control"
+        onChange={[Function]}
+        placeholder="Country code"
+        type="text"
+        value=""
+      />
+    </div>
+    <button
+      aria-label={null}
+      className="btn btn-secondary"
+      onClick={[Function]}
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+  <p>
+    This website allows you to quickly access the weather forecast for any city. You can also view the last search queries using the 
+    <em>
+      <a
+        href="/history"
+        onClick={[Function]}
+      >
+        History
+      </a>
+    </em>
+     link in the toolbar, to quickly retrieve the cities you frequently search for.
+  </p>
+  <p>
+    As you also may have noticed, there is a "Log in" button in the toolbar too. This feature is currently under development, and you will soon be informed of its avaibility if you register to the newsletter! But as the newsletter is also under development, don't forget to come around and see our progress on this website directly...
+  </p>
+  <p>
+    We hope you will find here the information you need. Feel free to contact us to submit a bug report, or fill a feature request!
+  </p>
+</div>
+`;

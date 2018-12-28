@@ -1,12 +1,13 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import { MemoryRouter as Router } from 'react-router-dom';
+
+import TestEnv from '../../utils/TestEnv';
 
 import Header from '../Header';
 
 test('header', () => {
   const tree = renderer
-    .create(<Router><Header /></Router>)
+    .create(<TestEnv><Header /></TestEnv>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

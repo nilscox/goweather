@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ForecastItem 1`] = `
+<div
+  className="my-2 card"
+>
+  <div
+    className="card-body"
+  >
+    <h5
+      className="card-title"
+    >
+      Friday, April 6th
+    </h5>
+    <p
+      className="text-center card-text"
+    >
+      <strong>
+        light rain
+      </strong>
+    </p>
+    <div
+      className="container"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="text-center col-12 col-sm-4"
+        >
+          Temperature: 
+          1.3
+          °C
+        </div>
+        <div
+          className="text-center col-12 col-sm-4"
+        >
+          Humidity: 
+          100
+          %
+        </div>
+        <div
+          className="text-center col-12 col-sm-4"
+        >
+          Pressure: 
+          1037.7
+          hPa
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,15 +1,16 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import { MemoryRouter as Router } from 'react-router-dom';
+
+import TestEnv from '../../utils/TestEnv';
 
 import PageTitle from '../PageTitle';
 
 test('PageTitle with text', () => {
   const tree = renderer
     .create(
-      <Router>
+      <TestEnv>
         <PageTitle>Title with text</PageTitle>
-      </Router>
+      </TestEnv>
     )
     .toJSON();
 
@@ -19,9 +20,9 @@ test('PageTitle with text', () => {
 test('PageTitle with node', () => {
   const tree = renderer
     .create(
-      <Router>
+      <TestEnv>
         <PageTitle><span>span</span></PageTitle>
-      </Router>
+      </TestEnv>
     )
     .toJSON();
 

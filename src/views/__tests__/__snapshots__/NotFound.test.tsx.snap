@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound 1`] = `
+<div
+  className="pb-4 container"
+>
+  <h1
+    className="text-center py-4 css-1aylpg"
+  >
+    404 - Page not found.
+  </h1>
+</div>
+`;
