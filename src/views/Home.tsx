@@ -9,11 +9,10 @@ import { Button, Container, Input, InputGroup } from 'reactstrap';
 import { State } from '../store/state';
 import { PageTitle } from '../components';
 import { ICity } from '../interfaces';
-import { fetchWeatherFromCityName, loadHistory } from '../store/actions';
+import { fetchWeatherFromCityName } from '../store/actions';
 
 type HomeProps = {
   searchHistory: ICity[],
-  loadHistory: () => any,
   fetchWeather: (cityName: string, countryCode: string) => any; // code smell
 };
 
@@ -32,7 +31,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchWeather: (cityName: string, countryCode: string) => {
     return dispatch(fetchWeatherFromCityName(cityName, countryCode));
   },
-  loadHistory: () => dispatch(loadHistory()),
 });
 
 /**
@@ -64,10 +62,6 @@ class Home extends Component<HomeProps, HomeState> {
     redirectCityId: null,
     filled: false,
   };
-
-  public componentDidMount() {
-    this.props.loadHistory();
-  }
 
   public render() {
     const { redirectCityId } = this.state;

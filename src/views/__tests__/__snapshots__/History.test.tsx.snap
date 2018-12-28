@@ -11,6 +11,15 @@ exports[`History 1`] = `
   </h1>
   <div
     className="container"
-  />
+  >
+    <button
+      aria-label={null}
+      className="btn btn-secondary"
+      onClick={[Function]}
+      type="button"
+    >
+      Clear
+    </button>
+  </div>
 </div>
 `;
