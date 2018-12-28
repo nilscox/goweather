@@ -1,4 +1,4 @@
-import { loadHistory, addHistory } from '../history-actions';
+import { loadHistory, addHistory, clearHistory } from '../history-actions';
 
 const MOCK_CITY = {id: 3038354, name: 'Aix-en-Provence', country: 'FR'};
 const MOCK_CITY2 = {id: 3003796, name: "Le Havre", country: "FR"};
@@ -36,4 +36,13 @@ test('should add an existing entry to the history', () => {
 
   expect(result).toHaveProperty('history', [MOCK_CITY2, MOCK_CITY]);
   expect(localStorage.setItem).toHaveBeenCalledWith('cities', JSON.stringify([MOCK_CITY2, MOCK_CITY]));
+});
+
+test('should clear the history', () => {
+  localStorage.setItem('cities', JSON.stringify([MOCK_CITY]));
+
+  const result = clearHistory();
+
+  expect(result).toHaveProperty('history', []);
+  expect(localStorage.clear).toHaveBeenCalled();
 });
