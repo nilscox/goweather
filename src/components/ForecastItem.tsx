@@ -2,7 +2,7 @@
 import { css, jsx } from '@emotion/core';
 import { Card, CardText, CardBody, CardTitle, Container, Row, Col } from 'reactstrap';
 
-import { IWeather } from '../store/state';
+import { IWeather } from '../interfaces';
 
 const ForecastItem = ({ date, description, temperature, humidity, pressure }: IWeather) => (
   <Card css={cardStyle} className="my-2">

@@ -9,6 +9,8 @@ import { Button, Input, InputGroup } from 'reactstrap';
 import { State } from '../store/state';
 import { fetchWeatherFromCityName } from '../store/actions';
 
+import { addToHistory } from '../services/history-service';
+
 const mapStateToProps = (state: State) => ({
 
 });
@@ -106,8 +108,10 @@ class Home extends Component<HomeProps, HomeState> {
     const { payload } = await this.props.fetchWeather(cityName, countryCode);
     const { res, json } = payload;
 
-    if (res.ok)
+    if (res.ok) {
+      addToHistory({ id: json.city.id, name: json.city.name, country: json.city.country });
       this.setState({ redirectCityId: json.city.id });
+    }
   }
 
 }

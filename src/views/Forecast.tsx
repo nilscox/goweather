@@ -7,7 +7,8 @@ import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
 
 import ForecastItem from '../components/ForecastItem';
 
-import { State, IWeather } from '../store/state';
+import { IWeather } from '../interfaces';
+import { State } from '../store/state';
 import { fetchWeatherFromCityId } from '../store/actions';
 
 const mapStateToProps = (state: State) => {

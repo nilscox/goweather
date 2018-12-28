@@ -1,12 +1,4 @@
-import { Moment } from 'moment';
-
-export interface IWeather {
-  date: Moment,
-  description: string,
-  humidity: number,
-  pressure: number,
-  temperature: number,
-}
+import { IWeather } from '../interfaces';
 
 export type State = {
   cityName: string,
