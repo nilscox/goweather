@@ -21,6 +21,7 @@ type HomeState = {
   cityName: string;
   countryCode: string;
   redirectCityId: number | null;
+  filled: boolean,
 };
 
 const mapStateToProps = (state: State) => ({
@@ -41,7 +42,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 class Home extends Component<HomeProps, HomeState> {
 
   public static getDerivedStateFromProps(props: HomeProps, state: HomeState): Partial<HomeState> | null {
-    if (state.cityName.length || state.countryCode.length)
+    if (state.filled)
       return null;
 
     const { searchHistory } = props;
@@ -50,6 +51,7 @@ class Home extends Component<HomeProps, HomeState> {
       return {
         cityName: searchHistory[0].name,
         countryCode: searchHistory[0].country,
+        filled: true,
       };
     }
 
@@ -60,6 +62,7 @@ class Home extends Component<HomeProps, HomeState> {
     cityName: '',
     countryCode: '',
     redirectCityId: null,
+    filled: false,
   };
 
   public componentDidMount() {
