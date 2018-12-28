@@ -12,9 +12,9 @@
     "jsx-no-lambda": false,
     "interface-over-type-literal": false,
     "curly": false,
-    "no-console": false,
     "ordered-imports": false,
     "jsx-boolean-value": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "no-shadowed-variable": false
   }
 }

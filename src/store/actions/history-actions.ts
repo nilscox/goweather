@@ -38,3 +38,13 @@ export const addHistory = (city: ICity) => {
     type: LOAD_HISTORY,
   };
 };
+
+export const CLEAR_HISTORY = 'CLEAR_HISTORY';
+
+export const clearHistory = () => {
+  localStorage.clear();
+
+  return {
+    type: CLEAR_HISTORY,
+  };
+};
