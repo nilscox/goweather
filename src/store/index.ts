@@ -9,11 +9,11 @@ const logger = createLogger({
   diff: true,
 });
 
-const store = createStore(rootReducer,
-  applyMiddleware(
-    reduxPackMiddleware,
-    logger,
-  ),
-);
+const middlewares = [reduxPackMiddleware];
+
+if (process.env.NODE_ENV !== 'test')
+  middlewares.push(logger);
+
+const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 export default store;
