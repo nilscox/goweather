@@ -6,13 +6,16 @@ import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { Button, Container, Input, InputGroup } from 'reactstrap';
 
+import { State } from '../store/state';
 import { PageTitle } from '../components';
 import { ICity } from '../interfaces';
-import { fetchWeatherFromCityName } from '../store/actions';
-import { getHistory, addToHistory } from '../services/history-service';
+import { fetchWeatherFromCityName, loadHistory, addHistory } from '../store/actions';
 
 type HomeProps = {
-  fetchWeather: (cityName: string, countryCode: string) => any; // code smell
+  searchHistory: ICity[],
+  addHistory: (city: ICity) => any, // code smell
+  loadHistory: () => any,
+  fetchWeather: (cityName: string, countryCode: string) => any;
 };
 
 type HomeState = {
@@ -21,10 +24,16 @@ type HomeState = {
   redirectCityId: number | null;
 };
 
+const mapStateToProps = (state: State) => ({
+  searchHistory: state.history,
+});
+
 const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addHistory: (city: ICity) => dispatch(addHistory(city)),
   fetchWeather: (cityName: string, countryCode: string) => {
     return dispatch(fetchWeatherFromCityName(cityName, countryCode));
   },
+  loadHistory: () => dispatch(loadHistory()),
 });
 
 /**
@@ -33,6 +42,22 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
  */
 class Home extends Component<HomeProps, HomeState> {
 
+  public static getDerivedStateFromProps(props: HomeProps, state: HomeState): Partial<HomeState> | null {
+    if (state.cityName.length || state.countryCode.length)
+      return null;
+
+    const { searchHistory } = props;
+
+    if (searchHistory.length) {
+      return {
+        cityName: searchHistory[0].name,
+        countryCode: searchHistory[0].country,
+      };
+    }
+
+    return null;
+  }
+
   public state = {
     cityName: '',
     countryCode: '',
@@ -40,14 +65,7 @@ class Home extends Component<HomeProps, HomeState> {
   };
 
   public componentDidMount() {
-    const history: ICity[] = getHistory();
-
-    if (history.length > 0) {
-      this.setState({
-        cityName: history[0].name,
-        countryCode: history[0].country,
-      });
-    }
+    this.props.loadHistory();
   }
 
   public render() {
@@ -132,7 +150,7 @@ class Home extends Component<HomeProps, HomeState> {
     if (res.ok) {
       const { city } = json;
 
-      addToHistory({ id: city.id, name: city.name, country: city.country });
+      this.props.addHistory({ id: city.id, name: city.name, country: city.country });
       this.setState({ redirectCityId: city.id });
     }
   }
@@ -143,4 +161,4 @@ const formStyle = css`
   max-width: 450px;
 `;
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

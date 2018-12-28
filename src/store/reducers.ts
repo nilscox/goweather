@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { handle } from 'redux-pack';
 import * as moment from 'moment';
 
-import { FETCH_WEATHER } from './actions';
+import { FETCH_WEATHER, LOAD_HISTORY } from './actions';
 
 const weather = (state: any = null, action: any) => {
   if (action.type === FETCH_WEATHER) {
@@ -44,7 +44,15 @@ const cityName = (state: any = null, action: any) => {
   return state;
 };
 
+const history = (state: any = [], action: any) => {
+  if (action.type === LOAD_HISTORY)
+    return action.history;
+
+  return state;
+};
+
 export default combineReducers({
   cityName,
+  history,
   weather,
 });

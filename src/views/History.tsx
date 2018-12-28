@@ -1,32 +1,29 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
+import { State } from '../store/state';
 import { ICity } from '../interfaces';
 import { PageTitle } from '../components';
-import { getHistory } from '../services/history-service';
 
-type HistoryState = {
+type HistoryProps = {
   cities: ICity[];
 };
+
+const mapStateToProps = (state: State) => ({
+  cities: state.history,
+})
 
 /**
  * History page. Displays a list of cities that have already been searched.
  */
-class History extends Component<{}, HistoryState> {
-
-  public state = {
-    cities: [],
-  };
-
-  public componentDidMount() {
-    this.setState({ cities: getHistory() });
-  }
+class History extends Component<HistoryProps> {
 
   public render() {
-    const { cities } = this.state;
+    const { cities } = this.props;
 
     return (
       <Container className="pb-4">
@@ -51,4 +48,4 @@ class History extends Component<{}, HistoryState> {
 
 }
 
-export default History;
+export default connect(mapStateToProps)(History);
