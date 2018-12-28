@@ -21,4 +21,4 @@ const makePackAction = (lifecycle: string, { type, payload, meta = {} }: ActionA
 export default makePackAction;
 
 // TODO: configure jest so it does not thinks this module is a test
-test('', () => {});
+test('', () => { expect(true).not.toBe(false); });
