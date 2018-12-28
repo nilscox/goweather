@@ -6,10 +6,11 @@ import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import { Button, Input, InputGroup } from 'reactstrap';
 
+import { ICity } from '../interfaces';
 import { State } from '../store/state';
 import { fetchWeatherFromCityName } from '../store/actions';
 
-import { addToHistory } from '../services/history-service';
+import { getHistory, addToHistory } from '../services/history-service';
 
 const mapStateToProps = (state: State) => ({
 
@@ -38,6 +39,17 @@ class Home extends Component<HomeProps, HomeState> {
     countryCode: '',
     redirectCityId: null,
   };
+
+  public componentDidMount() {
+    const lastSearch: ICity = getHistory()[0];
+
+    if (lastSearch) {
+      this.setState({
+        cityName: lastSearch.name,
+        countryCode: lastSearch.country,
+      });
+    }
+  }
 
   public render() {
     const { redirectCityId } = this.state;
