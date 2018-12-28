@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer 1`] = `
+<footer
+  className="text-muted text-center py-2 css-1l7bpnt"
+>
+  Made with ♥ by 
+  <a
+    className="text-muted"
+    href="https://github.com/nilscox"
+  >
+    nilscox
+  </a>
+   for 
+  <a
+    className="text-muted"
+    href="https://gojob.com"
+  >
+    gojob
+  </a>
+  .
+</footer>
+`;

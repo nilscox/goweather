@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageTitle with node 1`] = `
+<h1
+  className="text-center py-4 css-1aylpg"
+>
+  <span>
+    span
+  </span>
+</h1>
+`;
+
+exports[`PageTitle with text 1`] = `
+<h1
+  className="text-center py-4 css-1aylpg"
+>
+  Title with text
+</h1>
+`;
