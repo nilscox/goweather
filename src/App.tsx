@@ -16,7 +16,7 @@ const App = () => (
 
       <div className="container px-0">
 
-        <Header>Weather Forecast</Header>
+        <Header />
 
         <div css={pageStyle}>
           <Switch>
@@ -45,6 +45,8 @@ const wrapperStyle = css`
 const pageStyle = css`
   background-color: #FFFFFF66;
   min-height: 360px;
+  border: 1px solid #CCCCCC;
+  border-top: 0;
 `;
 
 export default App;

@@ -15,7 +15,7 @@ export const addToHistory = (city: ICity) => {
   const history = getHistory();
   const idx = history.findIndex(({ id }: ICity) => id === city.id);
 
-  if (idx > 0)
+  if (idx >= 0)
     history.splice(idx, 1);
 
   history.unshift(city);

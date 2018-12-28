@@ -1,11 +1,17 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import { Card, CardText, CardBody, CardTitle, Container, Row, Col } from 'reactstrap';
 
-import { IWeather } from '../interfaces';
+import { IWeather } from '../../interfaces';
 
-const ForecastItem = ({ date, description, temperature, humidity, pressure }: IWeather) => (
-  <Card css={cardStyle} className="my-2">
+type ForecastItemProps = IWeather;
+
+/**
+ * Display a day of forecast weather.
+ * TODO: add an image (or icon)
+ */
+const ForecastItem = ({ date, description, temperature, humidity, pressure }: ForecastItemProps) => (
+  <Card className="my-2">
     <CardBody>
 
       <CardTitle>{ date.format('dddd, MMMM Do') }</CardTitle>
@@ -25,9 +31,5 @@ const ForecastItem = ({ date, description, temperature, humidity, pressure }: IW
     </CardBody>
   </Card>
 );
-
-const cardStyle = css`
-
-`;
 
 export default ForecastItem;
