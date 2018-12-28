@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import { Component } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { RouteComponentProps, Redirect, Link } from 'react-router-dom';
 
-import Header from '../components/Header';
+import ForecastItem from '../components/ForecastItem';
 
 import { State, IWeather } from '../store/state';
 import { fetchWeatherFromCityId } from '../store/actions';
@@ -76,40 +76,22 @@ class Forecast extends Component<ForecastProps, ForecastState> {
       return <Redirect to="/" />;
 
     return (
-      <div>
+      <div className="container">
 
-        <Header>
-          { cityName ? 'Weather in ' + cityName : 'Weather Forecast' }
-        </Header>
+        <h3 className="text-center py-4">Weather in { cityName }</h3>
 
-        <div css={listWrapperStyle} className="py-2">
-          { this.props.days.map(weather => this.renderWeather(weather)) }
+        <div className="mt-2">
+          { this.props.days.map(weather => <ForecastItem key={weather.date.toString()} {...weather} />) }
         </div>
 
-        <Link to="/">&lt; Home</Link>
+        <div className="py-2">
+          <Link to="/">&lt; Home</Link>
+        </div>
 
-      </div>
-    );
-  }
-
-  private renderWeather(weather: IWeather) {
-    return (
-      <div key={weather.date.toString()} css={weatherItemStyle} className="my-2 p-1">
-        <strong>{ weather.date.format('dddd, MMMM Do') }</strong>
-        <div className="text-center my-1">{ weather.description }</div>
-        <small>{ weather.temperature }°C, { weather.humidity }%, { weather.pressure }hPa</small>
       </div>
     );
   }
 
 }
-
-const listWrapperStyle = css`
-  max-width: 520px;
-`;
-
-const weatherItemStyle = css`
-  background-color: #FFFFFF66;
-`;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Forecast);

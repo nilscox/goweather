@@ -3,10 +3,8 @@ import { css, jsx } from '@emotion/core';
 import { Component } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { Button, Input, InputGroup } from 'reactstrap';
-
-import Header from '../components/Header';
 
 import { State } from '../store/state';
 import { fetchWeatherFromCityName } from '../store/actions';
@@ -46,14 +44,28 @@ class Home extends Component<HomeProps, HomeState> {
       return <Redirect to={'/forecast/' + redirectCityId} />;
 
     return (
-      <div>
-
-        <Header>Weather Forecast</Header>
+      <div className="px-4 pb-4">
 
         { this.renderForm() }
 
-        <p className="my-4">
-          <strong>Search for a city in the inputs above.</strong>
+        <p>
+          <strong>Welcome to Weather Forecast!</strong>
+        </p>
+
+        <p>
+          This website allows you to quickly access the weather forecast for any city.
+          You can also view the last search queries using the <em><Link to="/history">History</Link></em> link in the toolbar, so you can quickly retrieve
+          the cities you frequently search for.
+        </p>
+
+        <p>
+          As you also may have noticed, there is a Log in button in the toolbar too. This feature is currently under development, and you will soon
+          be informed of its avaibility if you register to the newsletter! But as the newsletter is also under development, don't forget to come around
+          and see our progress on this website.
+        </p>
+
+        <p>
+          We hope you will find this website usefull, feel free to contact us to submit a bug report, or fill a feature request!
         </p>
 
       </div>

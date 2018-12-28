@@ -7,17 +7,30 @@ import History from './views/History';
 import Home from './views/Home';
 import NotFound from './views/NotFound';
 
+import Header from './components/Header';
+import Footer from './components/Footer';
+
 const App = () => (
   <Router>
     <div css={wrapperStyle}>
-      <div className="container py-3">
-        <Switch>
-          <Route path="/" exact={true} component={Home} />
-          <Route path="/forecast/:cityId" component={Forecast} />
-          <Route path="/history" component={History} />
-          <Route component={NotFound} />
-        </Switch>
+
+      <div className="container px-0">
+
+        <Header>Weather Forecast</Header>
+
+        <div css={pageStyle}>
+          <Switch>
+            <Route path="/" exact={true} component={Home} />
+            <Route path="/forecast/:cityId" component={Forecast} />
+            <Route path="/history" component={History} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+
+        <Footer />
+
       </div>
+
     </div>
   </Router>
 );
@@ -26,7 +39,12 @@ const wrapperStyle = css`
   min-height: 100%;
   background-image: url('/img/background.jpg');
   background-size: cover;
-  background-opacity: 0.2;
+  background-attachment: fixed;
+`;
+
+const pageStyle = css`
+  background-color: #FFFFFF66;
+  min-height: 360px;
 `;
 
 export default App;
